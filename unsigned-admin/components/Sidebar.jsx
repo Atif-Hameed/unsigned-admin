@@ -2,7 +2,6 @@
 import React from 'react';
 import logo from '@/assets/logoSmall.png';
 import Image from 'next/image';
-import { LuSearch } from "react-icons/lu";
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { FaAnglesRight } from "react-icons/fa6";
