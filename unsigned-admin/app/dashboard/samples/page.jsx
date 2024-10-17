@@ -1,9 +1,10 @@
+import SampleCards from '@/components/SampleCards'
 import React from 'react'
 
 const page = () => {
   return (
-    <div>
-      Samples
+    <div className='px-6'>
+      <SampleCards/>
     </div>
   )
 }
