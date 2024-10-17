@@ -195,7 +195,7 @@ const Page = () => {
                         <option value="">Select Status</option>
                         <option value="complete">Inquiries</option>
                         <option value="samples">Samples</option>
-                        {/* <option value="bulks">Bulks</option> */}
+                        <option value="bulks">Bulks</option>
                     </select>
                     <button
                         className="bg-green-500 text-white py-2 rounded-lg mt-4"

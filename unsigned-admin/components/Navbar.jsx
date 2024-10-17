@@ -7,6 +7,7 @@ import Link from 'next/link'
 import Modal from './shared/Modal';
 import logo from '@/assets/logoSmall.png'
 import profile from '@/assets/profile.png'
+import { useAuth } from '@/provider/auth_context';
 
 
 const Navbar = ({ toggleSidebar }) => {
@@ -15,7 +16,11 @@ const Navbar = ({ toggleSidebar }) => {
     const [showPopup, setShowPopup] = useState(false);
     const pathName = usePathname()
     const pathSegments = pathName.split('/');
+    const { handleLogout, user } = useAuth();
     const activeName = pathSegments[pathSegments.length - 1];
+
+
+    console.log("User Data:", user);
 
     const handleToggle = () => {
         setOepn((prev) => !prev)
@@ -46,21 +51,17 @@ const Navbar = ({ toggleSidebar }) => {
 
                 <div className='flex items-center gap-3 w-fit'>
                     <div onClick={handleToggle} className='flex items-center gap-2 w-full relative cursor-pointer'>
-                        <div className='bg-lightBackground p-3 rounded-full'>
+                        <div className='bg-slate-300 p-3 rounded-full'>
                             <Image alt='' className='w-7' src={profile} />
                         </div>
-                        <div className='flex w-full items-start gap-1 '>
-                            <div className=''>
-                                <h1 className='text-primary font-medium leading-tight'>William John</h1>
-                                <p className='text-secondary'>Admin</p>
-                            </div>
-                            <IoIosArrowDown className="text-secondary text-xl mt-1" />
+                        <div className='flex w-full items-center gap-2 '>
+                            <p className='text-primary'>Admin</p>
+                            <IoIosArrowDown className="text-secondary text-xl " />
 
                             {
                                 open &&
                                 <div className='bg-white text-primary shadow-xl flex flex-col items-center gap-2 rounded-lg p-2 px-4 absolute top-12 left-0 w-full ' >
-                                    <Link href={'/dashboard/profile'} className='hover:bg-gray-300 w-full py-2 rounded-lg text-center '>Profile</Link>
-                                    <Link href={''} className='hover:bg-gray-300 w-full py-2 rounded-lg text-center '>Logout</Link>
+                                    <button onClick={handleLogout} className='hover:bg-gray-300 w-full py-2 rounded-lg text-center '>Log out</button>
                                 </div>
                             }
                         </div>

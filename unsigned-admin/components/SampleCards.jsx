@@ -5,11 +5,11 @@ import { MdOutlineColorLens } from "react-icons/md";
 import { BiDotsVerticalRounded } from 'react-icons/bi';
 import Link from 'next/link';
 import { useQuery } from '@tanstack/react-query';
-import { deleteOrder, getAllCompleteOrders } from '@/app/action/orders-action';
+import { deleteOrder, getAllSampleOrders } from '@/app/action/orders-action';
 import toast, { Toaster } from 'react-hot-toast';
 import { IoCloseOutline } from 'react-icons/io5';
 
-const InquiryCards = () => {
+const SampleCards = () => {
 
     const [visibleCount, setVisibleCount] = useState(10);
     const [openPopupId, setOpenPopupId] = useState(null);
@@ -19,9 +19,9 @@ const InquiryCards = () => {
     const popupRef = useRef(null);
 
 
-    const { data: allCompleteOrders, error, isLoading, refetch } = useQuery({
-        queryKey: ['allCompleteOrders'],
-        queryFn: getAllCompleteOrders, // No user ID required here
+    const { data: allSampleOrders, error, isLoading, refetch } = useQuery({
+        queryKey: ['allSampleOrders'],
+        queryFn: getAllSampleOrders, // No user ID required here
     });
 
 
@@ -78,7 +78,7 @@ const InquiryCards = () => {
     if (error) {
         return <div className='min-h-screen flex justify-center items-center'>Error: {error.message}</div>;
     }
-    console.log("order", allCompleteOrders)
+    console.log("order", allSampleOrders)
 
 
     const handleLoadMore = () => {
@@ -91,14 +91,14 @@ const InquiryCards = () => {
             <Toaster />
 
             {/* Check if Orders array is empty */}
-            {allCompleteOrders.length === 0 ? (
+            {allSampleOrders.length === 0 ? (
                 <div className='my-20' >
                     <h1 className='text-2xl font-bold text-center'>No Data to Show yet</h1>
                 </div>
             ) : (
                 <>
                     <div className="grid md:grid-cols-3 grid-cols-1 py-6 gap-6 w-full">
-                        {allCompleteOrders.slice(0, visibleCount).map((order, i) => (
+                        {allSampleOrders.slice(0, visibleCount).map((order, i) => (
                             <div
                                 key={order.id}
                                 className="bg-lightBackground h-60 flex flex-col justify-between shadow-xl p-6"
@@ -133,7 +133,7 @@ const InquiryCards = () => {
 
                                 <div className="flex justify-between items-center">
                                     <p className="text-labelColor">{order.date}</p>
-                                    <Link href={`/dashboard/inquiries/detail?id=${order.id}`} className="bg-white hover:bg-black hover:text-white text-black px-6 py-3 rounded-full">
+                                    <Link href={`/dashboard/samples/detail?id=${order.id}`} className="bg-white hover:bg-black hover:text-white text-black px-6 py-3 rounded-full">
                                         Expand
                                     </Link>
                                 </div>
@@ -142,7 +142,7 @@ const InquiryCards = () => {
                     </div>
 
                     {/* Load more button */}
-                    {visibleCount < allCompleteOrders.length && (
+                    {visibleCount < allSampleOrders.length && (
                         <div className="w-full flex items-end justify-end py-6">
                             <button
                                 onClick={handleLoadMore}
@@ -197,4 +197,4 @@ const InquiryCards = () => {
     );
 };
 
-export default InquiryCards;
+export default SampleCards;

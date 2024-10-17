@@ -22,7 +22,7 @@ const Sidebar = () => {
     };
 
     return (
-        <div className='bg-lightBackground text-gray flex flex-col border-r border-gray-400 items-center gap-4 h-full max-h-[900px] p-4 w-full'>
+        <div className='bg-lightBackground text-gray flex flex-col border-r border-gray-400 items-center gap-4 h-full max-h-full p-4 w-full'>
             <div className='w-full flex flex-col items-center'>
                 <div>
                     <Image alt='' src={logo} className='w-48' />

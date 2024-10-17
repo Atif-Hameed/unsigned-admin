@@ -2,18 +2,48 @@
 
 import Navbar from '@/components/Navbar';
 import Sidebar from '@/components/Sidebar';
+import AuthContextProvider, { useAuth } from '@/provider/auth_context';
+import { useRouter } from 'next/navigation';
 import React, { useState, useEffect } from 'react';
 
-const Layout = ({ children }) => {
+
+export default function Layout({ children }) {
+    return (
+        <AuthContextProvider>
+            <DashboardLayout>{children}</DashboardLayout>
+        </AuthContextProvider>
+    );
+}
+
+
+const DashboardLayout = ({ children }) => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
+    const { user, isLoading } = useAuth();
+    const router = useRouter()
+
+    useEffect(() => {
+        if (!isLoading && !user) {
+            router.push("/");  // Redirect to login if not authenticated
+        }
+    }, [user, isLoading, router]);
+
+    useEffect(() => {
+        setSidebarOpen(false);
+    }, [children]);
+
+    if (isLoading) {
+        return <h2>Loading...</h2>;
+    }
+
+    if (!user) {
+        return <h2>Redirecting to login...</h2>;
+    }
 
     const toggleSidebar = () => {
         setSidebarOpen(!sidebarOpen);
     };
 
-    useEffect(() => {
-        setSidebarOpen(false);
-    }, [children]);
+
 
     return (
         <div className='w-full min-h-screen flex justify-between overflow-auto  relative'>
@@ -39,5 +69,3 @@ const Layout = ({ children }) => {
         </div>
     );
 }
-
-export default Layout;
