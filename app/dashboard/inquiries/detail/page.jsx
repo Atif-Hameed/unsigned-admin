@@ -84,7 +84,7 @@ const Page = () => {
             return;
         }
 
-        setUpdateLoading(true);
+        setUpdateLoading(true); 
         try {
             const res = await updateOrder(orderID, { status: updateStatus });
             console.log(res)
