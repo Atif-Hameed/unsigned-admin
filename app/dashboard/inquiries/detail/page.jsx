@@ -90,7 +90,7 @@ const Page = () => {
             console.log(res)
             toast.success('Order status updated successfully!');
             setIsUpdateModalOpen(false);
-            router.push('/dashboard/inquiries')
+            router.push('/dashboard/inquiries') 
         } catch (error) {
             toast.error('Failed to update order status.');
         } finally {
