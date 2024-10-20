@@ -1,10 +1,10 @@
-import BulksCards from '@/components/BulksCard'
+import FinishCards from '@/components/FinishedCards'
 import React from 'react'
 
 const page = () => {
   return (
     <div className='px-6'>
-      <BulksCards />
+      <FinishCards/>
     </div>
   )
 }

@@ -153,6 +153,61 @@ export const getAllSampleOrders = async () => {
     }
 };
 
+// Function to get all orders with the status "bulks"
+export const getAllBulksOrders = async () => {
+    const orderCollectionRef = collection(db, "orders"); // Reference to the 'orders' collection
+
+    // Create a query to filter orders based on status "samples"
+    const ordersQuery = query(
+        orderCollectionRef,
+        where("status", "==", "bulks")
+    );
+
+    try {
+        const querySnapshot = await getDocs(ordersQuery); // Execute the query
+        const orders = [];
+
+        querySnapshot.forEach((doc) => {
+            // Push the document data into the orders array
+            orders.push({ id: doc.id, ...doc.data() });
+        });
+
+        console.log("Bulks orders fetched successfully:", orders);
+        return orders; // Return the array of orders
+    } catch (error) {
+        console.error("Error fetching Bulks orders from Firestore:", error.message);
+        throw new Error("Failed to fetch Bulks orders");
+    }
+};
+
+
+// Function to get all orders with the status "Finish"
+export const getAllFinishOrders = async () => {
+    const orderCollectionRef = collection(db, "orders"); // Reference to the 'orders' collection
+
+    // Create a query to filter orders based on status "samples"
+    const ordersQuery = query(
+        orderCollectionRef,
+        where("status", "==", "finish")
+    );
+
+    try {
+        const querySnapshot = await getDocs(ordersQuery); // Execute the query
+        const orders = [];
+
+        querySnapshot.forEach((doc) => {
+            // Push the document data into the orders array
+            orders.push({ id: doc.id, ...doc.data() });
+        });
+
+        console.log("Finish orders fetched successfully:", orders);
+        return orders; // Return the array of orders
+    } catch (error) {
+        console.error("Error fetching Finish orders from Firestore:", error.message);
+        throw new Error("Failed to fetch Finish orders");
+    }
+};
+
 
 
 

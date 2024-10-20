@@ -70,7 +70,7 @@ const Page = () => {
             await deleteOrder(orderID);
             toast.success('Order deleted successfully!');
             setIsDeleteModalOpen(false);
-            router.push('/dashboard/samples')
+            router.push('/dashboard/bulks')
         } catch (error) {
             toast.error('Failed to delete order.');
         } finally {
@@ -90,7 +90,7 @@ const Page = () => {
             console.log(res)
             toast.success('Order status updated successfully!');
             setIsUpdateModalOpen(false);
-            router.push('/dashboard/samples')
+            router.push('/dashboard/bulks')
         } catch (error) {
             toast.error('Failed to update order status.');
         } finally {
@@ -194,8 +194,8 @@ const Page = () => {
                     >
                         <option value="">Select Status</option>
                         <option value="complete">Inquiries</option>
-                        {/* <option value="samples">Samples</option> */}
-                        <option value="bulks">Bulks</option>
+                        <option value="samples">Samples</option>
+                        <option value="finish">Finished</option>
                     </select>
                     <button
                         className="bg-green-500 text-white py-2 rounded-lg mt-4"

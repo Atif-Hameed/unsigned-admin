@@ -13,6 +13,7 @@ const Sidebar = () => {
         { name: 'Inquiries', src: '/dashboard/inquiries' },
         { name: 'Samples', src: '/dashboard/samples' },
         { name: 'Bulks', src: '/dashboard/bulks' },
+        { name: 'Finished', src: '/dashboard/finished' },
     ];
 
     // Function to check if the path includes the first two segments of the given src

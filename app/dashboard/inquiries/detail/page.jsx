@@ -111,7 +111,7 @@ const Page = () => {
                 {/* status */}
                 <div>
                     <h1 className='text-2xl font-semibold'>Status</h1>
-                    <div className='ml-10 flex flex-col gap-4 w-full justify-center'>
+                    <div className=' flex flex-col gap-4 w-full justify-center'>
                         <h1 className='font-medium text-center'>{data?.status || 'Inquiries'}</h1>
                     </div>
                 </div>
@@ -193,7 +193,7 @@ const Page = () => {
                         value={updateStatus}
                     >
                         <option value="">Select Status</option>
-                        <option value="complete">Inquiries</option>
+                        {/* <option value="complete">Inquiries</option> */}
                         <option value="samples">Samples</option>
                         {/* <option value="bulks">Bulks</option> */}
                     </select>

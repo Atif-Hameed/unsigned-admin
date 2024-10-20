@@ -70,7 +70,7 @@ const Page = () => {
             await deleteOrder(orderID);
             toast.success('Order deleted successfully!');
             setIsDeleteModalOpen(false);
-            router.push('/dashboard/samples')
+            router.push('/dashboard/bulks')
         } catch (error) {
             toast.error('Failed to delete order.');
         } finally {
@@ -90,7 +90,7 @@ const Page = () => {
             console.log(res)
             toast.success('Order status updated successfully!');
             setIsUpdateModalOpen(false);
-            router.push('/dashboard/samples')
+            router.push('/dashboard/finished')
         } catch (error) {
             toast.error('Failed to update order status.');
         } finally {
@@ -111,7 +111,7 @@ const Page = () => {
                 {/* status */}
                 <div>
                     <h1 className='text-2xl font-semibold'>Status</h1>
-                    <div className=' flex flex-col gap-4 w-full justify-center'>
+                    <div className='flex flex-col gap-4 w-full justify-center'>
                         <h1 className='font-medium text-center'>{data?.status || 'Inquiries'}</h1>
                     </div>
                 </div>
@@ -193,7 +193,7 @@ const Page = () => {
                         value={updateStatus}
                     >
                         <option value="">Select Status</option>
-                        <option value="complete">Inquiries</option>
+                        {/* <option value="complete">Inquiries</option> */}
                         {/* <option value="samples">Samples</option> */}
                         <option value="bulks">Bulks</option>
                     </select>
