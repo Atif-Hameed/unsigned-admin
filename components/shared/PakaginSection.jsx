@@ -1,6 +1,6 @@
 import React from 'react'
 
-const PakaginSection = ({data}) => {
+const PakaginSection = ({ data }) => {
     return (
         <div className='w-full h-full'>
             <h1 className='text-2xl font-semibold'>Packaging Section</h1>
@@ -11,10 +11,10 @@ const PakaginSection = ({data}) => {
                 )}
 
                 {/* Display Logo (if exists) */}
-                {data?.packing?.logo ? (
+                {data?.packing?.logo?.url ? (
                     <div className='mt-4'>
                         <h1 className='font-medium'>Logo:</h1>
-                        <a href={data.packing.custom_data.packing} target="_blank" rel="noopener noreferrer" className='text-blue-500 underline'>View File</a>
+                        <a href={data?.packing?.logo.url} target="_blank" rel="noopener noreferrer" className='text-blue-500 underline'>View File</a>
                     </div>
                 ) : (
                     <h1 className='font-medium'>Logo: <span className='font-bold'>-</span></h1>

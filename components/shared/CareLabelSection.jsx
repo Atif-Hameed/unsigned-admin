@@ -10,9 +10,9 @@ const CareLabelSection = ({ data }) => {
                 )}
 
                 {/* Mapping Brand File */}
-                {data?.care_label?.brand_file && (
+                {data?.care_label?.brand_file?.url && (
                     <div className='font-medium'>
-                        Brand File: <a href={data.care_label.brand_file} target="_blank" rel="noopener noreferrer" className='text-blue-500 underline'>View Brand File</a>
+                        Brand File: <a href={data.care_label.brand_file.url} target="_blank" rel="noopener noreferrer" className='text-blue-500 underline'>View Brand File</a>
                     </div>
                 )}
 
