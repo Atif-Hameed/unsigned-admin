@@ -88,7 +88,17 @@ const Page = () => {
     };
 
     const generatePDF = () => {
+        if (typeof window === 'undefined') {
+            console.error('PDF generation can only be done in the browser.');
+            return;
+        }
+
         const element = document.getElementById('order-details'); // Element to capture for the PDF
+        if (!element) {
+            console.error('Element to capture for PDF not found.');
+            return;
+        }
+
         const options = {
             margin: 0.5,
             filename: `Order_${orderID}.pdf`,
@@ -96,8 +106,10 @@ const Page = () => {
             html2canvas: { scale: 2 },
             jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
         };
+
         html2pdf().set(options).from(element).save();
     };
+
 
     if (loading) {
         return <div className="text-primary h-full w-full flex items-center justify-center text-xl">Loading...</div>;
