@@ -83,32 +83,33 @@ const Page = () => {
     };
 
     const generatePDF = async () => {
-        if (typeof window === 'undefined') {
+        // Check if the code is being executed in the browser
+        if (typeof window !== 'undefined') {
+            const element = document.getElementById('order-details');
+            if (!element) {
+                console.error('Element to capture for PDF not found.');
+                return;
+            }
+    
+            const options = {
+                margin: 0.5,
+                filename: `Order_${orderID}.pdf`,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+    
+            try {
+                await html2pdf().set(options).from(element).save();
+            } catch (error) {
+                console.error('Error generating PDF:', error);
+                toast.error('Failed to generate PDF.');
+            }
+        } else {
             console.error('PDF generation can only be done in the browser.');
-            return;
-        }
-
-        const element = document.getElementById('order-details');
-        if (!element) {
-            console.error('Element to capture for PDF not found.');
-            return;
-        }
-
-        const options = {
-            margin: 0.5,
-            filename: `Order_${orderID}.pdf`,
-            image: { type: 'jpeg', quality: 0.98 },
-            html2canvas: { scale: 2 },
-            jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
-        };
-
-        try {
-            await html2pdf().set(options).from(element).save();
-        } catch (error) {
-            console.error('Error generating PDF:', error);
-            toast.error('Failed to generate PDF.');
         }
     };
+    
 
     if (loading) {
         return <div className="text-primary h-full w-full flex items-center justify-center text-xl">Loading...</div>;
