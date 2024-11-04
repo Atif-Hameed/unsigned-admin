@@ -24,11 +24,9 @@ const Page = () => {
     const [updateLoading, setUpdateLoading] = useState(false);
     const [deleteLoading, setDeleteLoading] = useState(false);
     const router = useRouter();
-
     const params = useSearchParams();
     const orderID = params.get('id');
 
-    // Fetch the order details when the component mounts or orderID changes
     useEffect(() => {
         if (orderID) {
             const fetchOrder = async () => {
@@ -48,11 +46,8 @@ const Page = () => {
     }, [orderID]);
 
     const handleUpdateClick = () => setIsUpdateModalOpen(true);
-
     const handleDeleteClick = () => setIsDeleteModalOpen(true);
-
     const handleCloseUpdateModal = () => setIsUpdateModalOpen(false);
-
     const handleCloseDeleteModal = () => setIsDeleteModalOpen(false);
 
     const handleConfirmDelete = async () => {
@@ -61,7 +56,7 @@ const Page = () => {
             await deleteOrder(orderID);
             toast.success('Order deleted successfully!');
             setIsDeleteModalOpen(false);
-            router.push('/dashboard/inquiries')
+            router.push('/dashboard/inquiries');
         } catch (error) {
             toast.error('Failed to delete order.');
         } finally {
@@ -76,7 +71,7 @@ const Page = () => {
         }
         setUpdateLoading(true);
         try {
-            const res = await updateOrder(orderID, { status: updateStatus });
+            await updateOrder(orderID, { status: updateStatus });
             toast.success('Order status updated successfully!');
             setIsUpdateModalOpen(false);
             router.push('/dashboard/inquiries');
@@ -87,13 +82,13 @@ const Page = () => {
         }
     };
 
-    const generatePDF = () => {
+    const generatePDF = async () => {
         if (typeof window === 'undefined') {
             console.error('PDF generation can only be done in the browser.');
             return;
         }
 
-        const element = document.getElementById('order-details'); // Element to capture for the PDF
+        const element = document.getElementById('order-details');
         if (!element) {
             console.error('Element to capture for PDF not found.');
             return;
@@ -107,9 +102,13 @@ const Page = () => {
             jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
         };
 
-        html2pdf().set(options).from(element).save();
+        try {
+            await html2pdf().set(options).from(element).save();
+        } catch (error) {
+            console.error('Error generating PDF:', error);
+            toast.error('Failed to generate PDF.');
+        }
     };
-
 
     if (loading) {
         return <div className="text-primary h-full w-full flex items-center justify-center text-xl">Loading...</div>;
@@ -122,7 +121,6 @@ const Page = () => {
             <h1 className='text-4xl font-bold text-center text-primary my-5'>Order Details</h1>
 
             <div id="order-details" className='ml-5 flex flex-col gap-8'>
-                {/* Status, sections, etc. */}
                 <div>
                     <h1 className='text-2xl font-semibold'>Status</h1>
                     <div className='flex flex-col gap-4 w-full justify-center'>
@@ -131,7 +129,6 @@ const Page = () => {
                 </div>
 
                 <FitSection data={data} />
-
                 <div className='grid grid-cols-3 mt-8 gap-10 divide-x-4'>
                     <div className='px-6'><FabricSection data={data} /></div>
                     <div className='px-6'><ColorSection data={data} /></div>
@@ -149,23 +146,21 @@ const Page = () => {
             </div>
 
             <div className='w-full py-6 flex justify-end'>
-                <div className=' flex gap-6 items-center'>
-                    <button className="bg-yellow-500  whitespace-nowrap text-white py-3 px-6 text-xl rounded-lg" onClick={generatePDF}>
+                <div className='flex gap-6 items-center'>
+                    <button className="bg-yellow-500 whitespace-nowrap text-white py-3 px-6 text-xl rounded-lg" onClick={generatePDF}>
                         Download PDF
                     </button>
-                    <button className="bg-green-500 whitespace-nowrap text-white px-6  py-3 text-xl rounded-lg" onClick={handleUpdateClick}>
+                    <button className="bg-green-500 whitespace-nowrap text-white px-6 py-3 text-xl rounded-lg" onClick={handleUpdateClick}>
                         Update Status
                     </button>
-                    <button className="bg-primary text-white whitespace-nowrap px-6  py-3 text-xl rounded-lg" onClick={handleDeleteClick}>
+                    <button className="bg-primary text-white whitespace-nowrap px-6 py-3 text-xl rounded-lg" onClick={handleDeleteClick}>
                         Reject
                     </button>
                 </div>
             </div>
 
-
             {/* Update and Delete modals */}
             <Modal isOpen={isUpdateModalOpen} onClose={handleCloseUpdateModal} label="Update Status">
-                {/* Modal content */}
                 <div className="flex flex-col gap-4">
                     <label htmlFor="status" className="text-lg font-semibold">Select Status:</label>
                     <select id="status" className="p-2 border rounded-lg" onChange={(e) => setUpdateStatus(e.target.value)} value={updateStatus}>
