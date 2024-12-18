@@ -31,6 +31,7 @@ const FitSection = ({ data }) => {
                     <table className='min-w-full border-collapse border border-gray-300 mt-4'>
                         <thead>
                             <tr className='bg-gray-100'>
+                                <th className='border border-gray-300 px-4 py-2 text-left'>#</th>
                                 <th className='border border-gray-300 px-4 py-2 text-left'>Measurement</th>
                                 <th className='border border-gray-300 px-4 py-2 text-center'>XS</th>
                                 <th className='border border-gray-300 px-4 py-2 text-center'>S</th>
@@ -43,6 +44,7 @@ const FitSection = ({ data }) => {
                         <tbody>
                             {data.fit.fit_values.map((fit, index) => (
                                 <tr key={index} className='hover:bg-gray-50'>
+                                    <td className='border border-gray-300 px-4 py-2'>{index+1}</td>
                                     <td className='border border-gray-300 px-4 py-2'>{fit.name}</td>
                                     <td className='border border-gray-300 px-4 py-2 text-center'>{fit.xs || 'N/A'}</td>
                                     <td className='border border-gray-300 px-4 py-2 text-center'>{fit.s || 'N/A'}</td>
