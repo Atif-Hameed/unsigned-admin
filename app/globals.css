@@ -2,3 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+
+/* Ensure that sections don't break between pages */
+#order-details div {
+    page-break-inside: avoid;
+}
+
+/* For grid layouts or sections that you want to keep together */
+.grid {
+    page-break-inside: avoid;
+}
+
+/* Add to specific sections like FitSection, FabricSection, etc. */
+.FitSection, .FabricSection, .ColorSection, .NeckLabelSection, .CareLabelSection, .PrintSection, .PakaginSection, .QuantitySection, .AddressSection {
+    page-break-inside: avoid;
+}

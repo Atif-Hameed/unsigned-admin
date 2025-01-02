@@ -113,20 +113,29 @@ const Page = () => {
                     </div>
                 </div>
 
-                <FitSection data={data} />
-                <div className='grid grid-cols-3 mt-8 gap-10 divide-x-4'>
+                <div style={{ pageBreakInside: 'avoid' }}>
+                    <FitSection data={data} />
+                </div>
+
+                <div className='grid grid-cols-3 mt-8 gap-10 divide-x-4' style={{ pageBreakInside: 'avoid' }}>
                     <div className='px-6'><FabricSection data={data} /></div>
                     <div className='px-6'><ColorSection data={data} /></div>
                     <div className='px-6'><NeckLabelSection data={data} /></div>
                 </div>
-                <div className='grid grid-cols-3 mt-8 gap-10 divide-x-4'>
+
+                <div className='grid grid-cols-3 mt-8 gap-10 divide-x-4' style={{ pageBreakInside: 'avoid' }}>
                     <div className='px-6'><CareLabelSection data={data} /></div>
                     <div className='px-6'><PrintSection data={data} /></div>
                     <div className='px-6'><PakaginSection data={data} /></div>
                 </div>
 
-                <QuantitySection data={data} />
-                <AddressSection data={data} />
+                <div style={{ pageBreakInside: 'avoid' }}>
+                    <QuantitySection data={data} />
+                </div>
+
+                <div style={{ pageBreakInside: 'avoid' }}>
+                    <AddressSection data={data} />
+                </div>
             </div>
 
             <div className='w-full py-6 flex justify-end'>

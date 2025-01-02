@@ -49,7 +49,7 @@ const Page = () => {
             )}
 
             {/* Users Table */}
-            {!loading && !error && (
+            {!loading && !error && users.length > 0 && (
                 <div className="overflow-x-auto">
                     <table className="min-w-full bg-lightBackground border-collapse shadow-md rounded-lg">
                         <thead className="bg-dark">
