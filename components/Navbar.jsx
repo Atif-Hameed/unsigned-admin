@@ -20,7 +20,7 @@ const Navbar = ({ toggleSidebar }) => {
     const activeName = pathSegments[pathSegments.length - 1];
 
 
-    console.log("User Data:", user);
+    // console.log("User Data:", user);
 
     const handleToggle = () => {
         setOepn((prev) => !prev)

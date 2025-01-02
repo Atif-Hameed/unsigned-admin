@@ -22,11 +22,11 @@ const PrintSection = ({ data }) => {
                         {data.print.custom_data.comments && (
                             <h1 className='font-medium'>Comments: {data.print.custom_data.comments}</h1>
                         )}
-                        {data.print.custom_data.file && (
+                        {/* {data.print.custom_data.file && (
                             <h1 className='font-medium'>
                                 Attached File: <a href={data.print.custom_data.file} target="_blank" rel="noopener noreferrer" className='text-blue-500 underline'>View File</a>
                             </h1>
-                        )}
+                        )} */}
                     </div>
                 )}
             </div>

@@ -78,7 +78,7 @@ const FinishCards = () => {
     if (error) {
         return <div className='min-h-screen flex justify-center items-center'>Error: {error.message}</div>;
     }
-    console.log("order", allSampleOrders)
+    // console.log("order", allSampleOrders)
 
 
     const handleLoadMore = () => {

@@ -11,7 +11,7 @@ export const getOrder = async (orderID) => {
 
         if (orderSnapshot.exists()) {
             const orderData = { id: orderSnapshot.id, ...orderSnapshot.data() };
-            console.log("Order fetched successfully:", orderData);
+            // console.log("Order fetched successfully:", orderData);
             return orderData; // Return the order data
         } else {
             console.log("No such order found with the given ID");
@@ -87,7 +87,7 @@ export const getAllPendingOrders = async (user_id) => {
             orders.push({ id: doc.id, ...doc.data() });
         });
 
-        console.log("Pending orders fetched successfully:", orders);
+        // console.log("Pending orders fetched successfully:", orders);
         return orders; // Return the array of orders
     } catch (error) {
         console.error("Error fetching pending orders from Firestore:", error.message);
@@ -104,7 +104,7 @@ export const getAllCompleteOrders = async () => {
     // Create a query to filter orders based on status 'complete'
     const ordersQuery = query(
         orderCollectionRef,
-        where("status", "==", "complete")
+        where("status", "==", "completed")
     );
 
     try {
@@ -145,13 +145,15 @@ export const getAllSampleOrders = async () => {
             orders.push({ id: doc.id, ...doc.data() });
         });
 
-        console.log("Sample orders fetched successfully:", orders);
+        // console.log("Sample orders fetched successfully:", orders);
         return orders; // Return the array of orders
     } catch (error) {
         console.error("Error fetching sample orders from Firestore:", error.message);
         throw new Error("Failed to fetch sample orders");
     }
 };
+
+
 
 // Function to get all orders with the status "bulks"
 export const getAllBulksOrders = async () => {
@@ -172,7 +174,7 @@ export const getAllBulksOrders = async () => {
             orders.push({ id: doc.id, ...doc.data() });
         });
 
-        console.log("Bulks orders fetched successfully:", orders);
+        // console.log("Bulks orders fetched successfully:", orders);
         return orders; // Return the array of orders
     } catch (error) {
         console.error("Error fetching Bulks orders from Firestore:", error.message);
@@ -200,7 +202,7 @@ export const getAllFinishOrders = async () => {
             orders.push({ id: doc.id, ...doc.data() });
         });
 
-        console.log("Finish orders fetched successfully:", orders);
+        // console.log("Finish orders fetched successfully:", orders);
         return orders; // Return the array of orders
     } catch (error) {
         console.error("Error fetching Finish orders from Firestore:", error.message);
